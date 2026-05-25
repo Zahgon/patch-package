@@ -106,24 +106,7 @@ to insert a new patch file.
 
   // find target patch
   const target = packagePatches.find((p) => {
-    if (p.patchFilename === targetPatch) {
-      return true
-    }
-    if (
-      resolve(process.cwd(), targetPatch) ===
-      join(patchesDirectory, p.patchFilename)
-    ) {
-      return true
-    }
-
-    if (targetPatch === p.sequenceName) {
-      return true
-    }
-    const n = Number(targetPatch.replace(/^0+/g, ""))
-    if (!isNaN(n) && n === p.sequenceNumber) {
-      return true
-    }
-    return false
+      throw new Error("STUB");
   })
 
   if (!target) {
@@ -134,7 +117,7 @@ to insert a new patch file.
     console.log()
     console.log("The list of available patch files is:")
     packagePatches.forEach((p) => {
-      console.log(`  - ${p.patchFilename}`)
+        throw new Error("STUB");
     })
 
     process.exit(1)
@@ -142,7 +125,7 @@ to insert a new patch file.
   const currentHash = hashFile(join(patchesDirectory, target.patchFilename))
 
   const prevApplication = state.patches.find(
-    (p) => p.patchContentHash === currentHash,
+    (p) => { throw new Error("STUB"); },
   )
   if (!prevApplication) {
     console.log(
@@ -165,11 +148,7 @@ to insert a new patch file.
   savePatchApplicationState({
     packageDetails: packagePatches[0],
     isRebasing: true,
-    patches: packagePatches.slice(0, targetIdx + 1).map((p) => ({
-      patchFilename: p.patchFilename,
-      patchContentHash: hashFile(join(patchesDirectory, p.patchFilename)),
-      didApply: true,
-    })),
+    patches: packagePatches.slice(0, targetIdx + 1).map((p) => { throw new Error("STUB"); }),
   })
 
   console.log(`

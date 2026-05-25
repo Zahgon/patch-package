@@ -25,67 +25,7 @@ export function parseNameAndVersion(
   sequenceName?: string
   sequenceNumber?: number
 } | null {
-  const parts = str
-    .split("+")
-    .map((s) => s.trim())
-    .filter(Boolean)
-  if (parts.length === 0) {
-    return null
-  }
-  if (parts.length === 1) {
-    return { packageName: str }
-  }
-  const versionIndex = parts.findIndex((part) =>
-    part.match(/^\d+\.\d+\.\d+.*$/),
-  )
-  if (versionIndex === -1) {
-    const [scope, name] = parts
-    return { packageName: `${scope}/${name}` }
-  }
-  const nameParts = parts.slice(0, versionIndex)
-  let packageName
-  switch (nameParts.length) {
-    case 0:
-      return null
-    case 1:
-      packageName = nameParts[0]
-      break
-    case 2:
-      const [scope, name] = nameParts
-      packageName = `${scope}/${name}`
-      break
-    default:
-      return null
-  }
-
-  const version = parts[versionIndex]
-  const sequenceParts = parts.slice(versionIndex + 1)
-  if (sequenceParts.length === 0) {
-    return { packageName, version }
-  }
-
-  // expect sequenceParts[0] to be a number, strip leading 0s
-  const sequenceNumber = parseInt(sequenceParts[0].replace(/^0+/, ""), 10)
-  if (isNaN(sequenceNumber)) {
-    return null
-  }
-  switch (sequenceParts.length) {
-    case 1: {
-      return { packageName, version, sequenceNumber }
-    }
-    case 2: {
-      return {
-        packageName,
-        version,
-        sequenceName: sequenceParts[1],
-        sequenceNumber,
-      }
-    }
-    default: {
-      return null
-    }
-  }
-  return null
+    throw new Error("STUB");
 }
 
 export function getPackageDetailsFromPatchFilename(
@@ -95,7 +35,7 @@ export function getPackageDetailsFromPatchFilename(
     .replace(/(\.dev)?\.patch$/, "")
     .split("++")
     .map(parseNameAndVersion)
-    .filter((x): x is NonNullable<typeof x> => x !== null)
+    .filter((x): x is NonNullable<typeof x> => { throw new Error("STUB"); })
 
   if (parts.length === 0) {
     return null
@@ -112,15 +52,15 @@ export function getPackageDetailsFromPatchFilename(
     version: lastPart.version,
     path: join(
       "node_modules",
-      parts.map(({ packageName: name }) => name).join("/node_modules/"),
+      parts.map(({ packageName: name }) => { throw new Error("STUB"); }).join("/node_modules/"),
     ),
     patchFilename,
-    pathSpecifier: parts.map(({ packageName: name }) => name).join("/"),
+    pathSpecifier: parts.map(({ packageName: name }) => { throw new Error("STUB"); }).join("/"),
     humanReadablePathSpecifier: parts
-      .map(({ packageName: name }) => name)
+      .map(({ packageName: name }) => { throw new Error("STUB"); })
       .join(" => "),
     isNested: parts.length > 1,
-    packageNames: parts.map(({ packageName: name }) => name),
+    packageNames: parts.map(({ packageName: name }) => { throw new Error("STUB"); }),
     isDevOnly: patchFilename.endsWith(".dev.patch"),
     sequenceName: lastPart.sequenceName,
     sequenceNumber: lastPart.sequenceNumber,

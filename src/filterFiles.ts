@@ -8,10 +8,10 @@ export function removeIgnoredFiles(
   excludePaths: RegExp,
 ) {
   klawSync(dir, { nodir: true })
-    .map((item) => item.path.slice(`${dir}/`.length))
+    .map((item) => { throw new Error("STUB"); })
     .filter(
       (relativePath) =>
-        !relativePath.match(includePaths) || relativePath.match(excludePaths),
+        { throw new Error("STUB"); },
     )
-    .forEach((relativePath) => removeSync(join(dir, relativePath)))
+    .forEach((relativePath) => { throw new Error("STUB"); })
 }

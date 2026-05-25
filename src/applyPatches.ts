@@ -356,25 +356,13 @@ export function applyPatchesForPackage({
 
         savePatchApplicationState({
           packageDetails: patches[0],
-          patches: patches.slice(0, lastReversedPatchIndex).map((patch) => ({
-            didApply: true,
-            patchContentHash: hashFile(
-              join(appPath, patchDir, patch.patchFilename),
-            ),
-            patchFilename: patch.patchFilename,
-          })),
+          patches: patches.slice(0, lastReversedPatchIndex).map((patch) => { throw new Error("STUB"); }),
           isRebasing: false,
         })
       }
     } else {
       const nextState = appliedPatches.map(
-        (patch): PatchState => ({
-          didApply: true,
-          patchContentHash: hashFile(
-            join(appPath, patchDir, patch.patchFilename),
-          ),
-          patchFilename: patch.patchFilename,
-        }),
+        (patch): PatchState => { throw new Error("STUB"); },
       )
 
       if (failedPatch) {

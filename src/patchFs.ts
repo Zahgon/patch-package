@@ -8,8 +8,8 @@ import klawSync from "klaw-sync"
 export const getPatchFiles = (patchesDir: string) => {
   try {
     return klawSync(patchesDir, { nodir: true })
-      .map(({ path }) => relative(patchesDir, path))
-      .filter((path) => path.endsWith(".patch"))
+      .map(({ path }) => { throw new Error("STUB"); })
+      .filter((path) => { throw new Error("STUB"); })
   } catch (e) {
     return []
   }
@@ -47,7 +47,7 @@ export const getGroupedPatches = (patchesDirectory: string): GroupedPatches => {
   }
   for (const arr of Object.values(pathSpecifierToPatchFiles)) {
     arr.sort((a, b) => {
-      return (a.sequenceNumber ?? 0) - (b.sequenceNumber ?? 0)
+        throw new Error("STUB");
     })
   }
 

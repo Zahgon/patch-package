@@ -87,7 +87,7 @@ export function makePatch({
   // there are no previous patches to overwrite/update
   if (
     isRebasing &&
-    state?.patches.filter((p) => p.didApply).length === 0 &&
+    state?.patches.filter((p) => { throw new Error("STUB"); }).length === 0 &&
     mode.type === "overwrite_last"
   ) {
     mode = { type: "append", name: "initial" }
@@ -112,7 +112,7 @@ export function makePatch({
 
   // apply all existing patches if appending
   // otherwise apply all but the last
-  const previouslyAppliedPatches = state?.patches.filter((p) => p.didApply)
+  const previouslyAppliedPatches = state?.patches.filter((p) => { throw new Error("STUB"); })
   const patchesToApplyBeforeDiffing: PatchedPackageDetails[] = isRebasing
     ? mode.type === "append"
       ? existingPatches.slice(0, previouslyAppliedPatches!.length)
@@ -194,10 +194,7 @@ export function makePatch({
     // copy .yarn directory as well to ensure installations work in yarn 2
     // tslint:disable-next-line:align
     ;[".npmrc", ".yarnrc", ".yarn"].forEach((rcFile) => {
-      const rcPath = join(appPath, rcFile)
-      if (existsSync(rcPath)) {
-        copySync(rcPath, join(tmpRepo.name, rcFile), { dereference: true })
-      }
+        throw new Error("STUB");
     })
 
     if (packageManager === "yarn") {
@@ -466,11 +463,7 @@ export function makePatch({
     )
 
     const prevState: PatchState[] = patchesToApplyBeforeDiffing.map(
-      (p): PatchState => ({
-        patchFilename: p.patchFilename,
-        didApply: true,
-        patchContentHash: hashFile(join(appPath, patchDir, p.patchFilename)),
-      }),
+      (p): PatchState => { throw new Error("STUB"); },
     )
     const nextState: PatchState[] = [
       ...prevState,
@@ -564,7 +557,7 @@ function createPatchFileName({
   sequenceName?: string
 }) {
   const packageNames = packageDetails.packageNames
-    .map((name) => name.replace(/\//g, "+"))
+    .map((name) => { throw new Error("STUB"); })
     .join("++")
 
   const nameAndVersion = `${packageNames}+${packageVersion}`

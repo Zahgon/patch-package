@@ -88,19 +88,7 @@ if (argv.version || argv.v) {
     )
     const createIssue = argv["create-issue"]
     packageNames.forEach((packagePathSpecifier: string) => {
-      makePatch({
-        packagePathSpecifier,
-        appPath,
-        packageManager,
-        includePaths,
-        excludePaths,
-        patchDir,
-        createIssue,
-        mode:
-          "append" in argv
-            ? { type: "append", name: argv.append || undefined }
-            : { type: "overwrite_last" },
-      })
+        throw new Error("STUB");
     })
   } else {
     console.log("Applying patches...")

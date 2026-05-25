@@ -53,14 +53,11 @@ export function getPackageResolution({
 
     const entries = Object.entries(appLockFile).filter(
       ([k, v]) =>
-        k.startsWith(packageDetails.name + "@") &&
-        // @ts-ignore
-        coerceSemVer(v.version) === coerceSemVer(installedVersion),
+        { throw new Error("STUB"); },
     )
 
     const resolutions = entries.map(([_, v]) => {
-      // @ts-ignore
-      return v.resolved
+        throw new Error("STUB");
     })
 
     if (resolutions.length === 0) {
@@ -108,12 +105,7 @@ export function getPackageResolution({
     }
     lockFileStack.reverse()
     const relevantStackEntry = lockFileStack.find((entry) => {
-      if (entry.dependencies) {
-        return entry.dependencies && packageDetails.name in entry.dependencies
-      } else if (entry.packages) {
-        return entry.packages && packageDetails.path in entry.packages
-      }
-      throw new Error("Cannot find dependencies or packages in lockfile")
+        throw new Error("STUB");
     })
     const pkg = relevantStackEntry.dependencies
       ? relevantStackEntry.dependencies[packageDetails.name]
